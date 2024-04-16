@@ -80,10 +80,10 @@ function App() {
       <input type="text" id="search-input" placeholder="Search by college name" onChange={searchByName} />
 
       {/* Buttons for sorting */}
-      <button onClick={() => sortByRating('asc')}>Sort by Rating (↓)</button>
-      <button onClick={() => sortByRating('desc')}>Sort by Rating ( ↑ )</button>
-      <button onClick={() => sortByFees('asc')}>Sort by Fees (↓)</button>
-      <button onClick={() => sortByFees('desc')}>Sort by Fees ( ↑ )</button>
+      <button onClick={() => sortByRating('asc')}>Sort by Rating ↓</button>
+      <button onClick={() => sortByRating('desc')}>Sort by Rating  ↑ </button>
+      <button onClick={() => sortByFees('asc')}>Sort by Fees ↓</button>
+      <button onClick={() => sortByFees('desc')}>Sort by Fees  ↑ </button>
 
       {/* Table for displaying colleges */}
       <table id="college-table">
