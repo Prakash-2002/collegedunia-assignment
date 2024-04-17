@@ -4,7 +4,41 @@ body {
   margin: 0;
   padding: 20px;
 }
+.navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8px;
+}
 
+.conntainers{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+#search-input{
+  height: 30px;
+  width: 40vw;
+ font-size: 1rem;
+ border-radius: 5px;
+ border: none;
+ outline: none;
+}
+
+.sort-option{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sort-option button{
+  height: 19px;
+  border: none;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  margin-left: 1px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -35,4 +69,32 @@ tbody tr:hover {
   background-color: #ff9800;
   color: #fff;
   font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  body{
+
+    font-size: 10px;
+  }
+  .conntainers{
+    display: flex;
+  }
+  .sortby {
+   display: none;
+  }
+}
+@media only screen and (max-width: 500px) {
+  
+  .conntainers{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  #search-input{
+    width: 80vw;
+  }
+  .sort-option button{
+    margin-left: 5px;
+  }
+  
 }
