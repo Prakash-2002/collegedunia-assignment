@@ -3,18 +3,18 @@ import React, { useState, useEffect } from 'react';
 
 
 const initialColleges = [
-    {rank:"1", name: "IIT Bombay", location: "Mumbai, Maharashtra", course: "BE/B.Tech", fees: "1,49,000", userReviews: "8.1/10", ranking: "#24", featured: false },
-    {rank:"2", name: "IIT Madras", location: "Chennai, Tamil Nadu", course: "BE/B.Tech", fees: "2,29,300", userReviews: "8.8/10", ranking: "#3", featured: true },
-    {rank:"3", name: "NIT Trichy", location: "Tiruchirappalli, Tamil Nadu", course: "BE/B.Tech", fees: "1,85,000", userReviews: "8.5/10", ranking: "#5", featured: false },
-    {rank:"4", name: "BITS Pilani", location: "Pilani, Rajasthan", course: "BE/B.Tech", fees: "3,00,000", userReviews: "9.0/10", ranking: "#2", featured: true },
-    {rank:"5", name: "IIT Delhi", location: "New Delhi, NCR", course: "BE/B.Tech", fees: "2,10,000", userReviews: "8.4/10", ranking: "#6", featured: false },
-    {rank:"6", name: "VIT Vellore", location: "Vellore, Tamil Nadu", course: "BE/B.Tech", fees: "2,50,000", userReviews: "8.2/10", ranking: "#8", featured: false },
-    {rank:"7", name: "IIIT Hyderabad", location: "Hyderabad, Telangana", course: "BE/B.Tech", fees: "2,20,000", userReviews: "8.9/10", ranking: "#4", featured: true },
-    {rank:"8", name: "NIT Warangal", location: "Warangal, Telangana", course: "BE/B.Tech", fees: "1,80,000", userReviews: "8.7/10", ranking: "#9", featured: false },
-    {rank:"9", name: "SRM Institute of Science and Technology", location: "Chennai, Tamil Nadu", course: "BE/B.Tech", fees: "2,80,000", userReviews: "8.3/10", ranking: "#10", featured: true },
-    {rank:"10", name: "Thapar Institute of Engineering and Technology", location: "Patiala, Punjab", course: "BE/B.Tech", fees: "2,75,000", userReviews: "8.0/10", ranking: "#11", featured: false },
-    {rank:"11", name: "PSG College of Technology", location: "Coimbatore, Tamil Nadu", course: "BE/B.Tech", fees: "2,00,000", userReviews: "8.6/10", ranking: "#12", featured: false },
-    {rank:"12", name: "NIT Surathkal", location: "Surathkal, Karnataka", course: "BE/B.Tech", fees: "1,95,000", userReviews: "8.9/10", ranking: "#13", featured: true },
+    { name: "IIT Bombay", location: "Mumbai, Maharashtra", course: "BE/B.Tech", fees: "1,49,000", userReviews: "8.1/10", ranking: "#24", featured: false },
+    { name: "IIT Madras", location: "Chennai, Tamil Nadu", course: "BE/B.Tech", fees: "2,29,300", userReviews: "8.8/10", ranking: "#3", featured: true },
+    { name: "NIT Trichy", location: "Tiruchirappalli, Tamil Nadu", course: "BE/B.Tech", fees: "1,85,000", userReviews: "8.5/10", ranking: "#5", featured: false },
+    { name: "BITS Pilani", location: "Pilani, Rajasthan", course: "BE/B.Tech", fees: "3,00,000", userReviews: "9.0/10", ranking: "#2", featured: true },
+    { name: "IIT Delhi", location: "New Delhi, NCR", course: "BE/B.Tech", fees: "2,10,000", userReviews: "8.4/10", ranking: "#6", featured: false },
+    { name: "VIT Vellore", location: "Vellore, Tamil Nadu", course: "BE/B.Tech", fees: "2,50,000", userReviews: "8.2/10", ranking: "#8", featured: false },
+    { name: "IIIT Hyderabad", location: "Hyderabad, Telangana", course: "BE/B.Tech", fees: "2,20,000", userReviews: "8.9/10", ranking: "#4", featured: true },
+    { name: "NIT Warangal", location: "Warangal, Telangana", course: "BE/B.Tech", fees: "1,80,000", userReviews: "8.7/10", ranking: "#9", featured: false },
+    { name: "SRM Institute of Science and Technology", location: "Chennai, Tamil Nadu", course: "BE/B.Tech", fees: "2,80,000", userReviews: "8.3/10", ranking: "#10", featured: true },
+    {name: "Thapar Institute of Engineering and Technology", location: "Patiala, Punjab", course: "BE/B.Tech", fees: "2,75,000", userReviews: "8.0/10", ranking: "#11", featured: false },
+    { name: "PSG College of Technology", location: "Coimbatore, Tamil Nadu", course: "BE/B.Tech", fees: "2,00,000", userReviews: "8.6/10", ranking: "#12", featured: false },
+    { name: "NIT Surathkal", location: "Surathkal, Karnataka", course: "BE/B.Tech", fees: "1,95,000", userReviews: "8.9/10", ranking: "#13", featured: true },
     // Add more colleges here
   
   ];
@@ -53,7 +53,7 @@ const CollegeList = () => {
         const ratingB = parseFloat(b.userReviews);
         return order === "asc" ? ratingA - ratingB : ratingB - ratingA;
       });
-      setColleges(sortedColleges);
+      setColleges(sortedColleges.map((college, index) => ({ ...college, rank: (index + 1).toString() })));
     };
   
     // Sort by fees
@@ -63,7 +63,7 @@ const CollegeList = () => {
         const feesB = parseInt(b.fees.replace(/,/g, ''));
         return order === "asc" ? feesA - feesB : feesB - feesA;
       });
-      setColleges(sortedColleges);
+      setColleges(sortedColleges.map((college, index) => ({ ...college, rank: (index + 1).toString() })));
     };
   
     // Search by college name
@@ -73,6 +73,22 @@ const CollegeList = () => {
     const filteredColleges = colleges.filter(college =>
       college.name.toLowerCase().includes(searchTerm)
     );
+    const addDefaultRank = () => {
+        const updatedColleges = colleges.map((college, index) => ({
+          ...college,
+          rank: (index + 1).toString()
+        }));
+        setColleges(updatedColleges);
+      };
+    
+      useEffect(() => {
+        addDefaultRank();
+      }, []); // Run only once when component mounts
+    
+
+
+
+
   return (
     <div>
 <div className='conntainers'>
